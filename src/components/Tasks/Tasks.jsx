@@ -3,24 +3,23 @@ import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 
 import TaskList from "./TaskList";
-import NewTaskForm from "./NewTaskForm";
 
-const Tasks = (props) => {
-  const { tasks } = props;
-
-  const completedTasks = tasks.filter((task) => task.isChecked);
-  const incompleteTasks = tasks.filter((task) => !task.isChecked);
-
+const Tasks = ({ tasks, updateTask, deleteTask }) => {
   return (
-    <>
-      <Box mt={2}>
-        <NewTaskForm onAdd={props.onAddTask} />
-      </Box>
-      <Box mt={2}>
-        <TaskList tasksArray={incompleteTasks} listName="Incomplete Tasks" />
-        <TaskList tasksArray={completedTasks} listName="Completed Tasks" />
-      </Box>
-    </>
+    <div>
+      <TaskList
+        tasks={tasks.filter((task) => !task.isChecked)}
+        listName="Incomplete Tasks"
+        onUpdateTask={updateTask}
+        // onDeleteTask={deleteTask}
+      />
+      <TaskList
+        tasks={tasks.filter((task) => task.isChecked)}
+        listName="Completed Tasks"
+        onUpdateTask={updateTask}
+        // onDeleteTask={onDeleteTask}
+      />
+    </div>
   );
 };
 

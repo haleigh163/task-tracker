@@ -6,26 +6,24 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const NewTaskForm = (props) => {
+const AddTaskForm = ({ addTask }) => {
   const [enteredTaskName, setEnteredTaskName] = useState("");
   const [enteredTaskNameError, setEnteredTaskNameError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setEnteredTaskNameError(false);
 
     if (enteredTaskName.trim() === "") {
-      setEnteredTaskNameError(true);
-      return console.error("Please enter task name!");
+      return setEnteredTaskNameError(true);
     }
 
-    props.onAdd(enteredTaskName);
+    addTask(enteredTaskName);
     setEnteredTaskName("");
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Stack direction="row" spacing={1}>
         <TextField
           onChange={(e) => setEnteredTaskName(e.target.value)}
@@ -40,13 +38,13 @@ const NewTaskForm = (props) => {
           Add Task!
         </Button>
       </Stack>
-    </Box>
+    </form>
   );
 };
 
-export default NewTaskForm;
+export default AddTaskForm;
 
-NewTaskForm.propTypes = {
+AddTaskForm.propTypes = {
   enteredTaskName: PropTypes.string,
   enteredTaskNameError: PropTypes.bool,
 };

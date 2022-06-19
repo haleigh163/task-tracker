@@ -6,20 +6,18 @@ import { ExpandMore, ExpandLess } from "@mui/icons-material";
 
 import TaskItem from "./TaskItem";
 
-const TaskList = (props) => {
-  const { tasksArray, listName } = props;
-
+const TaskList = ({ tasks, listName, onDeleteTask, onUpdateTask }) => {
   const [showTasks, setShowTasks] = useState(false);
   const onClickHandler = () => setShowTasks(!showTasks);
 
-  const taskItems = tasksArray.map((task) => {
+  const taskItems = tasks.map((task) => {
     const taskId = task.id;
     return (
       <TaskItem
         key={taskId}
         {...task}
-        onDelete={props.onDeleteTask}
-        onToggleChecked={props.onToggleChecked}
+        // onDelete={onDeleteTask}
+        // onUpdate={onUpdateTask}
       />
     );
   });
@@ -29,7 +27,7 @@ const TaskList = (props) => {
       subheader={
         <ListSubheader sx={{ display: "flex" }} onClick={onClickHandler}>
           {listName}
-          <span> ({tasksArray.length})</span>
+          <span> ({tasks.length})</span>
           <IconButton sx={{ marginLeft: "auto" }}>
             {!showTasks && <ExpandMore />}
             {showTasks && <ExpandLess />}

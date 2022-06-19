@@ -10,9 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-const TaskItem = (props) => {
-  const { id, title: name, isChecked } = props;
-
+const TaskItem = ({ id, name, isChecked, onDelete, onUpdate }) => {
   return (
     <ListItem
       divider
@@ -22,7 +20,7 @@ const TaskItem = (props) => {
           edge="end"
           aria-label="delete"
           color="primary"
-          onClick={() => props.onDelete(id)}
+          onClick={() => deleteTask}
         >
           <DeleteIcon />
         </IconButton>
@@ -33,9 +31,9 @@ const TaskItem = (props) => {
           <Checkbox
             edge="start"
             checked={isChecked}
-            onClick={(e) => {
-              props.onToggleChecked(id, e.target.checked);
-            }}
+            // onClick={(e) => {
+            //   onUpdate(id, "isChecked", !e.target.checked);
+            // }}
             icon={<CheckCircleOutlineIcon />}
             checkedIcon={<CheckCircleIcon />}
           />
@@ -48,8 +46,8 @@ const TaskItem = (props) => {
 
 export default TaskItem;
 
-TaskItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  isChecked: PropTypes.bool.isRequired,
-};
+// TaskItem.propTypes = {
+//   id: PropTypes.string.isRequired,
+//   name: PropTypes.string.isRequired,
+//   isChecked: PropTypes.bool.isRequired,
+// };
